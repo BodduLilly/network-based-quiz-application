@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NetQuiz – Quiz History &amp; Performance Records</title>
+    <meta name="description" content="View past Computer Networks quiz attempts, scores, and dates." />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="app-wrapper">
+      <!-- Navbar -->
+      <header class="navbar">
+        <a href="dashboard.html" class="brand-wrapper">
+          <svg class="brand-logo-svg" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="20" cy="8" r="5" fill="#38bdf8" stroke="#ffffff" stroke-width="2" />
+            <circle cx="8" cy="30" r="5" fill="#2563eb" stroke="#ffffff" stroke-width="2" />
+            <circle cx="32" cy="30" r="5" fill="#0284c7" stroke="#ffffff" stroke-width="2" />
+            <line x1="20" y1="8" x2="8" y2="30" stroke="#7dd3fc" stroke-width="2.5" stroke-dasharray="3 3" />
+            <line x1="20" y1="8" x2="32" y2="30" stroke="#7dd3fc" stroke-width="2.5" stroke-dasharray="3 3" />
+            <line x1="8" y1="30" x2="32" y2="30" stroke="#7dd3fc" stroke-width="2.5" />
+            <circle cx="20" cy="19" r="2.5" fill="#ffffff" />
+          </svg>
+          <div class="brand-text">
+            <span class="brand-title">NetQuiz</span>
+            <span class="brand-subtitle">Performance Log</span>
+          </div>
+        </a>
+
+        <div class="nav-actions">
+          <a href="dashboard.html" class="nav-link">&larr; Back to Dashboard</a>
+        </div>
+      </header>
+
+      <!-- Main History Container -->
+      <main class="main-content">
+        <div class="section-title-wrap" style="margin-bottom: 1.5rem;">
+          <div>
+            <h1 class="section-title">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.5">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+              Assessment History Log
+            </h1>
+            <p style="font-size: 0.85rem; color: #64748b; margin-top: 0.25rem;">
+              Persistent record of all completed Computer Networks quizzes stored in browser LocalStorage.
+            </p>
+          </div>
+
+          <div style="display: flex; gap: 0.75rem; align-items: center;">
+            <span id="historyCountBadge" class="nav-badge-pbl" style="background:#0f172a; border-color:#334155;">
+              0 Records
+            </span>
+            <button type="button" id="clearHistoryBtn" class="btn btn-outline-danger btn-sm">
+              🗑️ Clear All History
+            </button>
+          </div>
+        </div>
+
+        <!-- History Records Table Card -->
+        <div id="historyTableContainer" class="history-table-card">
+          <div class="table-responsive">
+            <table class="data-table" aria-label="Quiz History Table">
+              <thead>
+                <tr>
+                  <th>Attempt</th>
+                  <th>Category Module</th>
+                  <th>Date &amp; Time</th>
+                  <th>Score</th>
+                  <th>Percentage</th>
+                  <th>Status (&ge;60%)</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="historyTableBody">
+                <!-- Dynamically populated rows by js/history.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Empty State Container -->
+        <div id="historyEmptyState" class="empty-state-box" style="display: none; background: #ffffff; border-radius: 16px; border: 1px solid #e2e8f0;">
+          <svg class="empty-state-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <circle cx="12" cy="14" r="3"></circle>
+            <line x1="12" y1="2" x2="12" y2="8"></line>
+          </svg>
+          <h3 style="font-size: 1.2rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem;">No Quiz Attempts Recorded Yet</h3>
+          <p style="max-width: 450px; margin: 0 auto 1.5rem; color: #64748b; font-size: 0.9rem;">
+            You have not completed any quizzes yet. Choose a category from the Dashboard and test your networking knowledge!
+          </p>
+          <a href="dashboard.html" class="btn btn-primary">
+            <span>Go to Dashboard &amp; Start Quiz</span>
+            <span>&rarr;</span>
+          </a>
+        </div>
+      </main>
+
+      <!-- Clear History Confirmation Modal -->
+      <div id="clearHistoryModal" class="modal-overlay" role="dialog" aria-modal="true">
+        <div class="modal-dialog" style="max-width: 440px;">
+          <div class="modal-header">
+            <h3>Clear All Assessment History?</h3>
+            <button type="button" id="closeClearModalBtn" class="modal-close-btn">&times;</button>
+          </div>
+          <div class="modal-body">
+            <p>Are you sure you want to permanently delete all recorded quiz attempts?</p>
+            <p style="font-size: 0.85rem; color: #dc2626; margin-top: 0.5rem; font-weight: 600;">
+              ⚠️ This will reset your dashboard stats and remove all past scores on this browser.
+            </p>
+          </div>
+          <div class="modal-footer" style="display: flex; gap: 0.75rem;">
+            <button type="button" id="cancelClearModalBtn" class="btn btn-secondary btn-sm">Cancel</button>
+            <button type="button" id="confirmClearModalBtn" class="btn btn-outline-danger btn-sm">Yes, Delete History</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="footer-inner">
+          <p><strong>NetQuiz</strong> – An Interactive Computer Networks Project-Based Learning (PBL) System</p>
+          <p class="footer-pbl-tag">LocalStorage API Persistence Engine (JSON Serialized Array)</p>
+        </div>
+      </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/auth.js"></script>
+    <script src="js/history.js"></script>
+  </body>
+</html>

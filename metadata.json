@@ -1,0 +1,6 @@
+{
+  "name": "NetQuiz – Computer Networks Quiz Application",
+  "description": "Interactive Computer Networks Quiz platform for college PBL showcasing client-server architecture, OSI/TCP-IP models, protocols, and subnetting.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

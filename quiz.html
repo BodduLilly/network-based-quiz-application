@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NetQuiz – Quiz Assessment</title>
+    <meta name="description" content="Attempt timed Computer Networks multiple-choice assessment." />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="app-wrapper">
+      <!-- Navbar -->
+      <header class="navbar">
+        <a href="#" id="navBrandExitLink" class="brand-wrapper">
+          <svg class="brand-logo-svg" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="20" cy="8" r="5" fill="#38bdf8" stroke="#ffffff" stroke-width="2" />
+            <circle cx="8" cy="30" r="5" fill="#2563eb" stroke="#ffffff" stroke-width="2" />
+            <circle cx="32" cy="30" r="5" fill="#0284c7" stroke="#ffffff" stroke-width="2" />
+            <line x1="20" y1="8" x2="8" y2="30" stroke="#7dd3fc" stroke-width="2.5" stroke-dasharray="3 3" />
+            <line x1="20" y1="8" x2="32" y2="30" stroke="#7dd3fc" stroke-width="2.5" stroke-dasharray="3 3" />
+            <line x1="8" y1="30" x2="32" y2="30" stroke="#7dd3fc" stroke-width="2.5" />
+            <circle cx="20" cy="19" r="2.5" fill="#ffffff" />
+          </svg>
+          <div class="brand-text">
+            <span class="brand-title">NetQuiz</span>
+            <span class="brand-subtitle">Computer Networks Assessment</span>
+          </div>
+        </a>
+
+        <div class="nav-actions">
+          <button type="button" id="exitQuizNavBtn" class="nav-link" style="background: none; border: none; cursor: pointer;">
+            &larr; Exit to Dashboard
+          </button>
+        </div>
+      </header>
+
+      <!-- Main Quiz Container -->
+      <main class="main-content" style="max-width: 900px;">
+        <!-- Topbar: Category Title & 10-Minute Countdown Timer -->
+        <div class="quiz-topbar">
+          <div class="quiz-title-area">
+            <h2 id="quizCategoryTitle">Loading Quiz Module...</h2>
+            <p>10 Multiple Choice Questions • 1 Correct Option • Passing Grade: 60%</p>
+          </div>
+
+          <!-- 10-Minute Countdown Timer -->
+          <div id="quizTimerBox" class="timer-box" title="10-minute timer. Quiz auto-submits when time reaches 00:00">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span id="quizTimerDisplay">10:00</span>
+          </div>
+
+          <!-- Animated Progress Track -->
+          <div class="progress-track" aria-label="Assessment Progress">
+            <div id="quizProgressBarFill" class="progress-bar-fill" style="width: 10%;"></div>
+          </div>
+        </div>
+
+        <!-- Question Palette (Quick Jump 1 to 10) -->
+        <div class="palette-container">
+          <div class="palette-title">
+            <span>Question Navigation Palette</span>
+            <span style="font-size: 0.75rem; color: #64748b; font-weight: normal;">
+              <span style="display:inline-block; width:10px; height:10px; background:#2563eb; border-radius:2px; margin-right:3px;"></span> Answered 
+              &nbsp;|&nbsp; 
+              <span style="display:inline-block; width:10px; height:10px; border:1px solid #cbd5e1; border-radius:2px; margin-right:3px; margin-left:6px;"></span> Unanswered
+            </span>
+          </div>
+          <div id="questionPaletteGrid" class="palette-grid">
+            <!-- Injected by js/quiz.js: buttons 1 to 10 -->
+          </div>
+        </div>
+
+        <!-- Main Question Card -->
+        <div class="quiz-main-card">
+          <div class="question-meta-row">
+            <span id="questionCounterText" class="question-counter-pill">Question 1 of 10</span>
+            <span id="questionConceptBadge" class="concept-badge">OSI Architecture</span>
+          </div>
+
+          <!-- Question Prompt -->
+          <h3 id="questionPromptText" class="question-text">
+            Loading question prompt...
+          </h3>
+
+          <!-- Options Container -->
+          <div id="optionsContainer" class="options-list">
+            <!-- 4 Options rendered by js/quiz.js -->
+          </div>
+
+          <!-- Bottom Navigation Controls -->
+          <div class="quiz-nav-row">
+            <button type="button" id="prevQuestionBtn" class="btn btn-secondary" disabled>
+              &larr; Previous Question
+            </button>
+
+            <div style="display: flex; gap: 0.75rem;">
+              <button type="button" id="nextQuestionBtn" class="btn btn-primary">
+                Next Question &rarr;
+              </button>
+
+              <button type="button" id="submitQuizBtn" class="btn btn-primary" style="background: linear-gradient(135deg, #16a34a, #15803d); box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);">
+                <span>Submit Quiz</span>
+                <span>✓</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- Submit Confirmation In-App Modal (Works in all iFrames & Live Server) -->
+      <div id="submitConfirmModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="submitModalTitle">
+        <div class="modal-dialog" style="max-width: 480px;">
+          <div class="modal-header">
+            <h3 id="submitModalTitle">Confirm Quiz Submission</h3>
+            <button type="button" id="closeSubmitModalBtn" class="modal-close-btn" aria-label="Close modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <p id="submitModalSummary" style="font-size: 1.05rem; color: #0f172a; margin-bottom: 0.85rem; font-weight: 600;">
+              You have answered 0 of 10 questions.
+            </p>
+            <div id="submitModalWarning" class="alert-banner alert-error" style="margin-bottom: 1rem; display: none;">
+              <span>⚠️</span>
+              <div id="submitModalWarningText">Some questions remain unanswered.</div>
+            </div>
+            <p style="font-size: 0.85rem; color: #64748b; line-height: 1.5;">
+              Once submitted, your answers will be evaluated against the Computer Networks answer key and a comprehensive solutions review will be generated.
+            </p>
+          </div>
+          <div class="modal-footer" style="display: flex; gap: 0.75rem;">
+            <button type="button" id="cancelSubmitModalBtn" class="btn btn-secondary btn-sm">
+              Review Questions
+            </button>
+            <button type="button" id="confirmFinalSubmitBtn" class="btn btn-primary btn-sm" style="background: linear-gradient(135deg, #16a34a, #15803d); box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);">
+              ✓ Yes, Submit Quiz
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exit Quiz Modal -->
+      <div id="exitQuizModal" class="modal-overlay" role="dialog" aria-modal="true">
+        <div class="modal-dialog" style="max-width: 420px;">
+          <div class="modal-header">
+            <h3>Exit Assessment?</h3>
+            <button type="button" id="closeExitModalBtn" class="modal-close-btn">&times;</button>
+          </div>
+          <div class="modal-body">
+            <p>Are you sure you want to return to the Dashboard? Unsubmitted answers for this quiz attempt will not be recorded.</p>
+          </div>
+          <div class="modal-footer" style="display: flex; gap: 0.75rem;">
+            <button type="button" id="cancelExitModalBtn" class="btn btn-secondary btn-sm">Stay on Quiz</button>
+            <a href="dashboard.html" class="btn btn-outline-danger btn-sm">Exit to Dashboard</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="footer-inner">
+          <p><strong>NetQuiz</strong> – An Interactive Computer Networks Project-Based Learning (PBL) System</p>
+          <p class="footer-pbl-tag">Client-Side Exam Engine with Deterministic Answer Key Verification</p>
+        </div>
+      </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/questions.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/quiz.js"></script>
+  </body>
+</html>

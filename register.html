@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NetQuiz – Student Registration</title>
+    <meta name="description" content="Register as a student to attempt Computer Networks quizzes and track progress." />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="app-wrapper">
+      <!-- Navbar -->
+      <header class="navbar">
+        <a href="index.html" class="brand-wrapper">
+          <svg class="brand-logo-svg" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="20" cy="8" r="5" fill="#38bdf8" stroke="#ffffff" stroke-width="2" />
+            <circle cx="8" cy="30" r="5" fill="#2563eb" stroke="#ffffff" stroke-width="2" />
+            <circle cx="32" cy="30" r="5" fill="#0284c7" stroke="#ffffff" stroke-width="2" />
+            <line x1="20" y1="8" x2="8" y2="30" stroke="#7dd3fc" stroke-width="2.5" stroke-dasharray="3 3" />
+            <line x1="20" y1="8" x2="32" y2="30" stroke="#7dd3fc" stroke-width="2.5" stroke-dasharray="3 3" />
+            <line x1="8" y1="30" x2="32" y2="30" stroke="#7dd3fc" stroke-width="2.5" />
+            <circle cx="20" cy="19" r="2.5" fill="#ffffff" />
+          </svg>
+          <div class="brand-text">
+            <span class="brand-title">NetQuiz</span>
+            <span class="brand-subtitle">Computer Networks PBL</span>
+          </div>
+        </a>
+
+        <div class="nav-actions">
+          <a href="index.html" class="nav-link">&larr; Back to Login</a>
+        </div>
+      </header>
+
+      <!-- Main Registration Container -->
+      <main class="main-content auth-container">
+        <div class="auth-card">
+          <div class="auth-header">
+            <div class="auth-badge">Student Enrollment</div>
+            <h1>Create Student Account</h1>
+            <p>Register to practice and track Computer Networks skills</p>
+          </div>
+
+          <div class="auth-body">
+            <!-- Alert Notification Banner -->
+            <div id="registerAlert" class="alert-banner" role="alert"></div>
+
+            <form id="registerForm" novalidate>
+              <!-- Full Name -->
+              <div class="form-group">
+                <label for="fullName" class="form-label">Full Name</label>
+                <div class="form-input-wrap">
+                  <input
+                    type="text"
+                    id="fullName"
+                    class="form-input"
+                    placeholder="e.g. Jane Doe"
+                    autocomplete="name"
+                  />
+                </div>
+                <div id="nameError" class="form-error"></div>
+              </div>
+
+              <!-- Student Email -->
+              <div class="form-group">
+                <label for="regEmail" class="form-label">Student Email Address</label>
+                <div class="form-input-wrap">
+                  <input
+                    type="email"
+                    id="regEmail"
+                    class="form-input"
+                    placeholder="e.g. janedoe@university.edu"
+                    autocomplete="email"
+                  />
+                </div>
+                <div id="emailError" class="form-error"></div>
+              </div>
+
+              <!-- Password -->
+              <div class="form-group">
+                <label for="regPassword" class="form-label">Create Password (Min 6 characters)</label>
+                <div class="form-input-wrap">
+                  <input
+                    type="password"
+                    id="regPassword"
+                    class="form-input"
+                    placeholder="Create a strong password"
+                    autocomplete="new-password"
+                  />
+                  <button type="button" id="toggleRegPasswordBtn" class="password-toggle-btn" aria-label="Toggle password visibility">
+                    Show
+                  </button>
+                </div>
+                <div id="passwordError" class="form-error"></div>
+              </div>
+
+              <!-- Confirm Password -->
+              <div class="form-group">
+                <label for="confirmPassword" class="form-label">Confirm Password</label>
+                <div class="form-input-wrap">
+                  <input
+                    type="password"
+                    id="confirmPassword"
+                    class="form-input"
+                    placeholder="Re-enter your password"
+                    autocomplete="new-password"
+                  />
+                  <button type="button" id="toggleConfirmPasswordBtn" class="password-toggle-btn" aria-label="Toggle password visibility">
+                    Show
+                  </button>
+                </div>
+                <div id="confirmError" class="form-error"></div>
+              </div>
+
+              <div style="margin-top: 1.5rem; margin-bottom: 1.25rem;">
+                <button type="submit" id="registerSubmitBtn" class="btn btn-primary btn-full btn-lg">
+                  <span>Register &amp; Save Profile</span>
+                  <span>&rarr;</span>
+                </button>
+              </div>
+
+              <div style="text-align: center; font-size: 0.875rem; color: #64748b;">
+                Already registered? 
+                <a href="index.html" style="color: #2563eb; font-weight: 700; text-decoration: none;">Sign in here</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </main>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="footer-inner">
+          <p><strong>NetQuiz</strong> – An Interactive Computer Networks Project-Based Learning (PBL) System</p>
+          <p class="footer-pbl-tag">Local Storage Persistent Prototype for Academic Evaluation</p>
+        </div>
+      </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/auth.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        window.NetQuizAuth.setupRegisterPage();
+      });
+    </script>
+  </body>
+</html>

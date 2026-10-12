@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NetQuiz – Quiz Results &amp; Solutions Review</title>
+    <meta name="description" content="View score, pass/fail status, and detailed question explanations." />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="app-wrapper">
+      <!-- Navbar -->
+      <header class="navbar">
+        <a href="dashboard.html" class="brand-wrapper">
+          <svg class="brand-logo-svg" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="20" cy="8" r="5" fill="#38bdf8" stroke="#ffffff" stroke-width="2" />
+            <circle cx="8" cy="30" r="5" fill="#2563eb" stroke="#ffffff" stroke-width="2" />
+            <circle cx="32" cy="30" r="5" fill="#0284c7" stroke="#ffffff" stroke-width="2" />
+            <line x1="20" y1="8" x2="8" y2="30" stroke="#7dd3fc" stroke-width="2.5" stroke-dasharray="3 3" />
+            <line x1="20" y1="8" x2="32" y2="30" stroke="#7dd3fc" stroke-width="2.5" stroke-dasharray="3 3" />
+            <line x1="8" y1="30" x2="32" y2="30" stroke="#7dd3fc" stroke-width="2.5" />
+            <circle cx="20" cy="19" r="2.5" fill="#ffffff" />
+          </svg>
+          <div class="brand-text">
+            <span class="brand-title">NetQuiz</span>
+            <span class="brand-subtitle">Evaluation &amp; Review</span>
+          </div>
+        </a>
+
+        <div class="nav-actions">
+          <a href="dashboard.html" class="nav-link">&larr; Back to Dashboard</a>
+          <a href="history.html" class="nav-link">📜 View All History</a>
+        </div>
+      </header>
+
+      <!-- Main Results Container -->
+      <main class="main-content" style="max-width: 900px;">
+        <!-- Score Overview Card -->
+        <div class="results-score-card">
+          <!-- Pass / Fail Badge -->
+          <div id="resultStatusBadge" class="score-badge-status pass">
+            Passed Assessment
+          </div>
+
+          <h1 id="resultCategoryHeading" style="font-size: 1.5rem; font-weight: 800; margin-bottom: 0.5rem; color: #ffffff;">
+            Computer Networks Assessment
+          </h1>
+          <p id="resultTimestampText" style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 1.5rem;">
+            Completed on October 12, 2026
+          </p>
+
+          <!-- Large Score Percentage -->
+          <div class="score-circular-metric">
+            <span id="resultScorePercent">0</span><span class="score-percent-symbol">%</span>
+          </div>
+
+          <p id="resultFeedbackMessage" style="font-size: 1rem; color: #e2e8f0; max-width: 600px; margin: 0 auto;">
+            Congratulations! You have demonstrated good proficiency in this networking domain.
+          </p>
+
+          <!-- Score Metrics Row -->
+          <div class="score-breakdown-row">
+            <div class="score-stat-box">
+              <div id="statTotalQuestions" class="score-stat-num" style="color:#ffffff;">10</div>
+              <div class="score-stat-label">Total Questions</div>
+            </div>
+            <div class="score-stat-box">
+              <div id="statCorrectCount" class="score-stat-num" style="color:#4ade80;">0</div>
+              <div class="score-stat-label">Correct Answers</div>
+            </div>
+            <div class="score-stat-box">
+              <div id="statIncorrectCount" class="score-stat-num" style="color:#f87171;">0</div>
+              <div class="score-stat-label">Incorrect Answers</div>
+            </div>
+            <div class="score-stat-box">
+              <div id="statTimeSpent" class="score-stat-num" style="color:#38bdf8;">--</div>
+              <div class="score-stat-label">Time Elapsed</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-bottom: 2.5rem;">
+          <a id="retakeQuizBtn" href="quiz.html" class="btn btn-primary btn-lg">
+            <span>🔄 Retake Quiz</span>
+          </a>
+          <a href="dashboard.html" class="btn btn-secondary btn-lg">
+            <span>🏠 Back to Dashboard</span>
+          </a>
+          <a href="history.html" class="btn btn-secondary btn-lg">
+            <span>📜 View Quiz History</span>
+          </a>
+        </div>
+
+        <!-- Comprehensive Solution & Explanations Review -->
+        <section>
+          <div class="section-title-wrap">
+            <h2 class="section-title">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.5">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+                <polyline points="10 9 9 9 8 9"></polyline>
+              </svg>
+              Detailed Question Solutions &amp; Concepts
+            </h2>
+            <span style="font-size: 0.8rem; color: #64748b;">Accurate Answer Keys &amp; RFC References</span>
+          </div>
+
+          <!-- Question Cards Container -->
+          <div id="reviewQuestionsContainer">
+            <!-- Dynamically populated review cards -->
+          </div>
+        </section>
+      </main>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="footer-inner">
+          <p><strong>NetQuiz</strong> – An Interactive Computer Networks Project-Based Learning (PBL) System</p>
+          <p class="footer-pbl-tag">Instant Automated Evaluation &amp; Pedagogical Feedback Mechanism</p>
+        </div>
+      </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/auth.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        renderResultsPage();
+      });
+
+      function renderResultsPage() {
+        let resultData = null;
+        try {
+          const rawSession = sessionStorage.getItem("netquiz_latest_result");
+          if (rawSession) resultData = JSON.parse(rawSession);
+        } catch (e) {}
+
+        if (!resultData) {
+          try {
+            const rawLocal = localStorage.getItem("netquiz_latest_result");
+            if (rawLocal) resultData = JSON.parse(rawLocal);
+          } catch (e) {}
+        }
+
+        // Fallback: look at most recent history record if sessionStorage was refreshed
+        if (!resultData) {
+          try {
+            const rawHist = localStorage.getItem("netquiz_quiz_history");
+            const hist = rawHist ? JSON.parse(rawHist) : [];
+            if (hist.length > 0) {
+              const latest = hist[0];
+              resultData = {
+                categoryId: latest.categoryId || 1,
+                categoryTitle: latest.categoryTitle || "Computer Networks Assessment",
+                date: latest.date || new Date().toLocaleString(),
+                score: latest.score,
+                totalQuestions: latest.totalQuestions || 10,
+                percentage: latest.percentage,
+                passed: latest.passed,
+                timeSpentSeconds: 180,
+                detailedAnswers: []
+              };
+            }
+          } catch (e) {}
+        }
+
+        if (!resultData) {
+          window.location.href = "dashboard.html";
+          return;
+        }
+
+        // Set retake link
+        const retakeBtn = document.getElementById("retakeQuizBtn");
+        if (retakeBtn) retakeBtn.href = `quiz.html?category=${resultData.categoryId || 1}`;
+
+        // Populate Score Card
+        const heading = document.getElementById("resultCategoryHeading");
+        const timeText = document.getElementById("resultTimestampText");
+        const percentText = document.getElementById("resultScorePercent");
+        const badge = document.getElementById("resultStatusBadge");
+        const feedback = document.getElementById("resultFeedbackMessage");
+
+        if (heading) heading.textContent = resultData.categoryTitle || "Computer Networks Assessment";
+        if (timeText) timeText.textContent = `Completed on ${resultData.date || new Date().toLocaleString()}`;
+        if (percentText) percentText.textContent = resultData.percentage;
+
+        const isPass = resultData.percentage >= 60;
+        if (badge) {
+          badge.className = `score-badge-status ${isPass ? 'pass' : 'fail'}`;
+          badge.textContent = isPass ? "✓ PASSED (Score ≥ 60%)" : "✗ NEEDS IMPROVEMENT (Score < 60%)";
+        }
+
+        if (feedback) {
+          if (resultData.percentage >= 90) {
+            feedback.textContent = "Outstanding mastery! You have demonstrated exceptional command of these Computer Networks concepts.";
+          } else if (resultData.percentage >= 60) {
+            feedback.textContent = "Well done! You met the passing criteria. Review the question explanations below to solidify your understanding.";
+          } else {
+            feedback.textContent = "Passing score is 60%. Please review the conceptual explanations below and retake the quiz to improve your score.";
+          }
+        }
+
+        // Metrics
+        const elTotal = document.getElementById("statTotalQuestions");
+        const elCorrect = document.getElementById("statCorrectCount");
+        const elIncorrect = document.getElementById("statIncorrectCount");
+        const elTime = document.getElementById("statTimeSpent");
+
+        const correctCount = resultData.score;
+        const totalCount = resultData.totalQuestions || 10;
+        const incorrectCount = totalCount - correctCount;
+
+        if (elTotal) elTotal.textContent = totalCount;
+        if (elCorrect) elCorrect.textContent = correctCount;
+        if (elIncorrect) elIncorrect.textContent = incorrectCount;
+        if (elTime) {
+          const seconds = resultData.timeSpentSeconds || 0;
+          const mins = Math.floor(seconds / 60);
+          const secs = seconds % 60;
+          elTime.textContent = `${mins}m ${secs}s`;
+        }
+
+        // Render Question Reviews
+        const container = document.getElementById("reviewQuestionsContainer");
+        if (!container) return;
+
+        container.innerHTML = "";
+
+        const answersList = resultData.detailedAnswers || [];
+        if (answersList.length === 0) {
+          container.innerHTML = `
+            <div class="empty-state-box">
+              <p>Detailed question explanations are generated upon completing an active quiz session.</p>
+              <a href="quiz.html?category=${resultData.categoryId || 1}" class="btn btn-primary" style="margin-top:1rem;">Retake This Quiz</a>
+            </div>
+          `;
+          return;
+        }
+
+        const letters = ["A", "B", "C", "D"];
+
+        answersList.forEach((item, index) => {
+          const card = document.createElement("div");
+          card.className = `review-card ${item.isCorrect ? 'correct' : 'incorrect'}`;
+
+          const statusBadge = item.isCorrect 
+            ? `<span class="review-badge correct">✓ Correct</span>`
+            : `<span class="review-badge incorrect">✗ Incorrect / Unanswered</span>`;
+
+          let optionsHtml = "";
+          item.options.forEach((opt, optIdx) => {
+            let optClass = "neutral";
+            let optPrefix = "";
+
+            if (optIdx === item.correct) {
+              optClass = "correct-choice";
+              optPrefix = "✓ [CORRECT ANSWER] ";
+            } else if (optIdx === item.userChoice && !item.isCorrect) {
+              optClass = "user-choice-wrong";
+              optPrefix = "✗ [YOUR SELECTION] ";
+            }
+
+            optionsHtml += `
+              <div class="review-answer-item ${optClass}">
+                <strong style="width: 20px;">${letters[optIdx]}.</strong>
+                <span>${optPrefix}${opt}</span>
+              </div>
+            `;
+          });
+
+          card.innerHTML = `
+            <div class="review-header">
+              <span style="font-weight: 700; color: #475569; font-size: 0.85rem;">Question ${index + 1} of ${answersList.length}</span>
+              <div style="display:flex; align-items:center; gap:0.5rem;">
+                <span class="concept-badge">${item.concept || 'Concept'}</span>
+                ${statusBadge}
+              </div>
+            </div>
+            <div class="review-question-text">${item.question}</div>
+            <div class="review-answers-grid">
+              ${optionsHtml}
+            </div>
+            <div class="review-explanation-box">
+              <strong>💡 Concept Explanation:</strong> ${item.explanation}
+            </div>
+          `;
+
+          container.appendChild(card);
+        });
+      }
+    </script>
+  </body>
+</html>
